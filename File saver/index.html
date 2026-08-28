@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>IN App</title>
+</head>
+<body id="In1">
+    <div class="n1" id="mainBox"></div>
+
+    <script>
+    let savedUser = localStorage.getItem("INappUser");
+
+    if(savedUser) {
+        document.getElementById("mainBox").innerHTML = `
+            <h1 id="hh">Welcome back, <b><u>${savedUser}</u></b> 👋</h1>
+            <p>Enter your password to continue</p>
+            <input type="password" id="passInput" placeholder="Password">
+            <button id="myBtn1" onclick="login()">Unlock</button>
+            <br><br>
+            <a href="#" onclick="logout()" style="color:gray; font-size:14px;">Not you? Logout</a>
+        `;
+    } else {
+        document.getElementById("mainBox").innerHTML = `
+            <h1 id="hh">Welcome to <b><u>File-Storage</u></b> app</h1>
+            <button id="myBtn1" onclick="goToSignup()">Continue</button>
+        `;
+    }
+
+    function goToSignup() {
+        window.location.href = "signup.html"; 
+    }
+
+    function login() {
+        let pass = document.getElementById("passInput").value;
+        let savedPass = localStorage.getItem("INappPass_" + savedUser);
+
+        if(pass === savedPass) {
+            window.location.href = "home.html";
+        } else {
+            alert("Wrong password");
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem("INappUser");
+        location.reload();
+    }
+    </script>
+</body>
+</html>

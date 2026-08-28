@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>IN - Home</title>
+</head>
+<body id="InHome">
+    <header id="can">
+        <h2 id="appText">IN App</h2>
+    </header>
+
+    <header class="navbar">
+        <div class="menu-container">
+            <button class="hamburger" onclick="toggleDropdown()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <div id="dropdownMenu" class="dropdown">
+                <a href="#" onclick="openFileSelector()">
+                    📁 Select file
+                    <span class="icon">🗑️</span>
+                </a>
+                <a href="#" onclick="logout()">
+                    🚪 Logout
+                    <span class="icon">↗️</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Vault Section -->
+    <main class="vault">
+        <h3>My Vault 🔒</h3>
+        <button class="uploadBtn" onclick="uploadFile()">+ Upload File</button>
+
+        <ul id="fileList">
+            <!-- Files will load here automatically -->
+        </ul>
+    </main>
+
+    <!-- Hidden inputs -->
+    <!-- For uploading new files -->
+    <input type="file" id="uploadInput" style="display:none" onchange="saveFile(event)">
+    <!-- For deleting: pick a file name to delete -->
+    <input type="file" id="hiddenFileInput" style="display:none" onchange="deleteSelectedFile(event)">
+
+    <script src="script.js"></script>
+</body>
+</html>

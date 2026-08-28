@@ -1,0 +1,53 @@
+function finishSignup() {
+    let f = document.getElementById("firstName").value;
+    let s = document.getElementById("secondName").value;
+    let a = document.getElementById("age").value;
+    let p = document.getElementById("password").value;
+    let u = document.getElementById("username").value;
+    let agree = document.getElementById("agreeBox").checked;
+
+    if(!f || !s || !a || !p || !u) {
+        document.getElementById("error").innerText = "Please fill everything"; return;
+    }
+    if(a < 6 || a > 60) {
+        document.getElementById("error").innerText = "Age must be between 6 - 60"; return;
+    }
+    if(p.length < 6) {
+        document.getElementById("error").innerText = "Password must be 6+ characters"; return;
+    }
+    if(!agree) {
+        document.getElementById("error").innerText = "You must agree to terms"; return;
+    }
+
+    let userData = {firstName: f, secondName: s, age: a, password: p, username: u};
+    localStorage.setItem("INappUser", JSON.stringify(userData));
+    window.location.href = "home.html";
+}
+
+function loginUser() {
+    let enteredPass = document.getElementById("loginPass").value;
+    let user = JSON.parse(localStorage.getItem("INappUser"));
+
+    if(enteredPass === user.password){
+        window.location.href = "home.html";
+    } else {
+        document.getElementById("loginError").innerText = "Wrong password";
+    }
+}
+
+function logout() {
+    localStorage.removeItem("INappUser");
+    window.location.href = "index.html";
+}
+
+
+<div id="container">
+        <h1 id="welcomeText"></h1>
+        <p>This is your dashboard</p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        let user = JSON.parse(localStorage.getItem("INappUser"));
+        document.getElementById("welcomeText").innerText = "Welcome, @" + user.username;
+    </script>
